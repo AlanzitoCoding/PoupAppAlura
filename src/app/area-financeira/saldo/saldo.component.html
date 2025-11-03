@@ -1,11 +1,9 @@
-<section class="saldo-card">
-  <div class="titulo-wrapper">
-    <h2 class="texto-lg">Saldo disponível:</h2>
-  </div>
+<!-- Louvado seja o Senhor -->
 
-  <div class="corpo-card">
-    <span class="valor texto-xxxl" [appDestaqueValorNumerico]="saldo()">
-      {{ saldo() | currency:"BRL" }}
-    </span>
-  </div>
-</section>
+<app-card>
+  <h2 card-titulo class="texto-lg"><img class="icone-cedula" src="icones/cedula.svg" alt=""> Saldo disponível:</h2>
+
+  <span class="valor texto-xxxl" [appDestaqueValorNumerico]="saldo()" [corPositiva]="'var(--violeta-destaque)'">
+    {{ saldo() | currency:"BRL" }}
+  </span>
+</app-card>
