@@ -1,6 +1,6 @@
 // Louvado seja o Senhor
 
-import { Component, ElementRef, afterRender, input, viewChild } from '@angular/core';
+import { Component, ElementRef, afterRender, model, viewChild } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -10,13 +10,20 @@ import { Component, ElementRef, afterRender, input, viewChild } from '@angular/c
 })
 export class ModalComponent {
   modal = viewChild.required<ElementRef<HTMLDialogElement>>('transacaoModal');
-  isOpen = input(false);
-
+  isOpen = model(false);
+  
   constructor(){
     afterRender(() => {
       if(this.isOpen()){
         this.modal().nativeElement.showModal();
+      } 
+      else {
+        this.modal().nativeElement.close();
       }
     });
+  }
+
+  closeModal(){
+    this.isOpen.set(false);
   }
 }
