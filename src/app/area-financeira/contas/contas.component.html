@@ -16,9 +16,6 @@
       }
     </ul>
 
-    <app-botao class="botao-adicionar-conta">
-      <img src="icones/carteira.svg" alt="" class="icone-carteira">
-      Adicionar conta
-    </app-botao>
+    <app-botao-add-conta class="botao-adicionar-conta" (contaCriada)="contaCriada.emit($event)"/>
   </div>
 </app-card>

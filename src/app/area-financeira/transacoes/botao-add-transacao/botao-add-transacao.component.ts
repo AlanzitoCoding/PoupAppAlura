@@ -1,11 +1,12 @@
 // Louvado seja o Senhor
 
-import { Component, afterRender, output, signal } from '@angular/core';
+import { Component, afterRender, output, signal, input } from '@angular/core';
 import { BotaoComponent } from '../../../compartilhados/botao/botao.component';
 import { ModalComponent } from '../../../compartilhados/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { KeyValuePipe } from '@angular/common';
 import { TipoTransacao, Transacao } from '../../compartilhados/transacao.model';
+import { Conta } from '../../compartilhados/conta.model';
 
 @Component({
   selector: 'app-botao-add-transacao',
@@ -14,6 +15,8 @@ import { TipoTransacao, Transacao } from '../../compartilhados/transacao.model';
   styleUrl: './botao-add-transacao.component.css'
 })
 export class BotaoAddTransacaoComponent {
+  contas = input.required<Conta[]>();
+
   modalAberto = signal(false);
 
   novaTransacaoForm = {

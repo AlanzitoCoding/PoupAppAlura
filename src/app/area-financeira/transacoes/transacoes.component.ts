@@ -5,6 +5,7 @@ import { TransacaoComponent } from "./transacao/transacao.component";
 import { Transacao } from '../compartilhados/transacao.model';
 import { CardComponent } from '../compartilhados/card/card.component';
 import { BotaoAddTransacaoComponent } from './botao-add-transacao/botao-add-transacao.component';
+import { Conta } from '../compartilhados/conta.model';
 
 @Component({
   selector: 'app-transacoes',
@@ -14,6 +15,7 @@ import { BotaoAddTransacaoComponent } from './botao-add-transacao/botao-add-tran
 })
 export class TransacoesComponent {
   transacoes = input.required<Transacao[]>();
+  contas = input.required<Conta[]>();
 
   transacaoCriada = output<Transacao>();
 }

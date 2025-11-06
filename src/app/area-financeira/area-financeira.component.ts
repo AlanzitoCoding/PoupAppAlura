@@ -1,6 +1,6 @@
 // Louvado seja o Senhor
 
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { SaldoComponent } from "./saldo/saldo.component";
 import { TransacoesComponent } from "./transacoes/transacoes.component";
 import { ContasComponent } from "./contas/contas.component";
@@ -18,6 +18,10 @@ export class AreaFinanceiraComponent {
 
   processarTransacoes(transacao : Transacao){
     this.transacoes.update((transacoes) => [transacao, ...transacoes]);
+  }
+
+  processarContas(conta : Conta){
+    this.contas.update((contas) => [conta, ...contas]);
   }
 
   transacoes = signal<Transacao[]>([
@@ -63,7 +67,7 @@ export class AreaFinanceiraComponent {
     },
   ]);
 
-  contas: Conta[] = [
+  contas = signal<Conta[]>([
     {
       nome: 'Anybank',
       saldo: 1000,
@@ -76,5 +80,5 @@ export class AreaFinanceiraComponent {
       nome: 'Switch Bank',
       saldo: 0,
     },
-  ];
+  ]);
 }
