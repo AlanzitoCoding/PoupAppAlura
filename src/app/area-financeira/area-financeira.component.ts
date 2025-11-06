@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+// Louvado seja o Senhor
+
+import { Component, signal } from '@angular/core';
 import { SaldoComponent } from "./saldo/saldo.component";
 import { TransacoesComponent } from "./transacoes/transacoes.component";
 import { ContasComponent } from "./contas/contas.component";
@@ -12,9 +14,13 @@ import { Transacao, TipoTransacao } from './compartilhados/transacao.model';
   styleUrl: './area-financeira.component.css'
 })
 export class AreaFinanceiraComponent {
-  saldo = 520;
+  saldo = 0;
 
-  transacoes: Transacao[] = [
+  processarTransacoes(transacao : Transacao){
+    this.transacoes.update((transacoes) => [transacao, ...transacoes]);
+  }
+
+  transacoes = signal<Transacao[]>([
     {
       id: '5',
       nome: '',
@@ -55,7 +61,7 @@ export class AreaFinanceiraComponent {
       data: new Date('2024-10-01T00:00'),
       conta: 'Anybank'
     },
-  ];
+  ]);
 
   contas: Conta[] = [
     {

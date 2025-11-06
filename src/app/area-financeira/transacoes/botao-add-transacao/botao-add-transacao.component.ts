@@ -1,13 +1,15 @@
 // Louvado seja o Senhor
 
-import { Component, afterRender, signal } from '@angular/core';
+import { Component, afterRender, output, signal } from '@angular/core';
 import { BotaoComponent } from '../../../compartilhados/botao/botao.component';
 import { ModalComponent } from '../../../compartilhados/modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { KeyValuePipe } from '@angular/common';
+import { TipoTransacao, Transacao } from '../../compartilhados/transacao.model';
 
 @Component({
   selector: 'app-botao-add-transacao',
-  imports: [BotaoComponent, ModalComponent, FormsModule],
+  imports: [BotaoComponent, ModalComponent, FormsModule, KeyValuePipe],
   templateUrl: './botao-add-transacao.component.html',
   styleUrl: './botao-add-transacao.component.css'
 })
@@ -20,7 +22,11 @@ export class BotaoAddTransacaoComponent {
     valor: '',
     data: '',
     conta: ''
-  }
+  };
+
+  tiposTransacao = TipoTransacao;
+
+  transacaoCriada = output<Transacao>();
 
   constructor(){
     afterRender(() => {
@@ -33,7 +39,15 @@ export class BotaoAddTransacaoComponent {
   }
 
   onSubmit(){
-    console.log(this.novaTransacaoForm);
+    const newTransacao = new Transacao(
+      this.novaTransacaoForm.nome,
+      this.novaTransacaoForm.tipo as TipoTransacao,
+      Number(this.novaTransacaoForm.valor),
+      this.novaTransacaoForm.data,
+      this.novaTransacaoForm.conta
+    );
+
+    this.transacaoCriada.emit(newTransacao);
     this.modalAberto.set(false);
   }
 }
